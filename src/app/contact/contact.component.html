@@ -1,0 +1,38 @@
+<h2>Create New Contact(Using Form Builder)</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label>First Name:</label>
+    <input type="text"
+           name="firstName" required
+           formControlName="firstName"
+    >
+
+  </div>
+  <div>
+    <label>Last Name:</label>
+    <input type="text" id="lastName"
+           name="lastName" required
+           formControlName="lastName"
+    >
+  </div>
+  <div>
+    <label>Email:</label>
+    <input type="text" id="email"
+           name="email" required
+           formControlName="email"
+    >
+  </div>
+  <div>
+    <label>Phone:</label>
+    <input type="text" id="phone"
+           name="phone" required
+           formControlName="phone"
+    >
+  </div>
+  <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submit</button>
+</form>
+
+<ul>
+  <li> Name</li>
+  <li *ngFor="let contact of contacts">{{contact.firstName}}</li>
+</ul>
