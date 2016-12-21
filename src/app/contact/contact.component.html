@@ -3,36 +3,54 @@
   <div>
     <label>First Name:</label>
     <input type="text"
-           name="firstName" required
+           name="firstName" class="form-control" required
            formControlName="firstName"
     >
 
   </div>
   <div>
     <label>Last Name:</label>
-    <input type="text" id="lastName"
+    <input type="text" class="form-control" id="lastName"
            name="lastName" required
            formControlName="lastName"
     >
   </div>
   <div>
     <label>Email:</label>
-    <input type="text" id="email"
+    <input type="text" class="form-control" id="email"
            name="email" required
            formControlName="email"
     >
   </div>
-  <div>
-    <label>Phone:</label>
-    <input type="text" id="phone"
-           name="phone" required
-           formControlName="phone"
-    >
+  <div formArrayName="phone">
+    <div *ngFor="let number of form.get('phone').controls; let i = index">
+      <div class="row" formGroupName="{{i}}">
+        <label>Phone:</label>
+        <input type="text"
+               name="number" required
+               formControlName="number"
+        >
+        <label>Type:</label>
+        <select formControlName="type" class="form-control" name="type">
+          <option value="">Select type</option>
+          <option>Airtel</option>
+          <option>Robi</option>
+          <option>Gp</option>
+        </select>
+
+        <button class="btn-danger" (click)="removeNumber(i)">Delete</button>
+      </div>
+    </div>
+    <button class="btn-primary" (click)="addNumbers()">Add more</button>
+
   </div>
+
   <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submit</button>
 </form>
 
-<ul>
-  <li> Name</li>
-  <li *ngFor="let contact of contacts">{{contact.firstName}}</li>
-</ul>
+<!--<ul>
+  <li *ngFor="let contact of contacts">First Name:{{contact.firstName}}</li>
+  <li *ngFor="let contact of contacts">LastName: {{contact.lastName}}</li>
+  <li *ngFor="let contact of contacts">Email: {{contact.email}}</li>
+
+</ul>-->
